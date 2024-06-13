@@ -7,4 +7,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  namespace :api do
+    namespace :v1 do
+      # To simplify task we skip full nested RESTful Rails API / Grape implementation
+      # resources :tenants
+      #   resources :users, only: [:update]
+      # end
+      resources :users, only: [:update]
+    end
+  end
 end
