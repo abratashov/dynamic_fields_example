@@ -2,8 +2,11 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_resource
 
   def update
-    # TODO: update user
-    render json: @user
+    service = Api::Users::Update.call(user: @user, params: params[:user])
+
+    service_error!(service) and return if service.failure?
+
+    render json: service.user
   end
 
   private

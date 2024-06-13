@@ -3,6 +3,6 @@ class UserSerializer < ActiveModel::Serializer
   has_one :tenant
 
   def user_info
-    DynamicRecordSerializer.new(object.user_info)
+    object.user_info ? DynamicRecordSerializer.new(object.user_info) : {}
   end
 end

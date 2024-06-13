@@ -33,7 +33,7 @@ record = user.dynamic_records.create(
   data: {
     name: 'Jack',
     phone: 123456789,
-    gender: 'male1',
+    gender: 'male',
     languages: ['uk', 'en']
   }
 )

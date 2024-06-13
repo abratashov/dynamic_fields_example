@@ -23,6 +23,13 @@ module Api
                json: { error: { message: error.message, key: "#{error.record.class.name.downcase}_invalid",
                                 context: error.record.errors.as_json } }
       end
+
+      def service_error!(service)
+        return if service.success
+
+        status = service.status || :unprocessable_entity
+        render json: { error: { message: service.error, key: 'api_error' } }, status: status
+      end
     end
   end
 end
