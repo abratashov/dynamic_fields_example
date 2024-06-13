@@ -1,9 +1,13 @@
+require 'active_support/core_ext/hash/keys'
+require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash/indifferent_access'
+
 class DynamicFields
   attr_reader :struct, :field_names, :data, :errors
 
   def initialize(struct, data)
     @struct = struct.symbolize_keys
-    @field_names = struct.keys
+    @field_names = struct.keys.map(&:to_s)
     @data = data.symbolize_keys
     @errors = {}
   end

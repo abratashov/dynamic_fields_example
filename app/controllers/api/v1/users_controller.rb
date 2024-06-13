@@ -2,7 +2,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :set_resource
 
   def update
-    service = Api::Users::Update.call(user: @user, params: params[:user])
+    service = Api::Users::Update.call(user: @user, params: params[:user].to_unsafe_h)
 
     service_error!(service) and return if service.failure?
 

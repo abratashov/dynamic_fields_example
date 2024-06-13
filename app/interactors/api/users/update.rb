@@ -35,7 +35,7 @@ module Api
       end
 
       def params_hash
-        params.to_unsafe_h.dig(:user_info)
+        params.dig(:user_info)
       end
 
       def user_info_data
