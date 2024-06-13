@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDynamicStructs < ActiveRecord::Migration[7.1]
   def change
     create_table :dynamic_structs, id: :uuid do |t|

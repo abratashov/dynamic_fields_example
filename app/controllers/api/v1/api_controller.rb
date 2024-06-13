@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class ApiController < ActionController::API
@@ -28,7 +30,7 @@ module Api
         return if service.success
 
         status = service.status || :unprocessable_entity
-        render json: { error: { message: service.error, key: 'api_error' } }, status: status
+        render json: { error: { message: service.error, key: 'api_error' } }, status:
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/dynamic_fields'
 
 RSpec.describe DynamicFields do
@@ -25,7 +27,7 @@ RSpec.describe DynamicFields do
       }
     end
 
-    it { expect(fields.valid?).to be_truthy }
+    it { expect(fields).to be_valid }
   end
 
   context 'when valid with strings' do
@@ -40,31 +42,31 @@ RSpec.describe DynamicFields do
       }
     end
 
-    it { expect(fields.valid?).to be_truthy }
+    it { expect(fields).to be_valid }
   end
 
   context 'when invalid struct' do
     it {
       fields = described_class.new(struct, { name1: 'Jack' })
-      expect(fields.valid?).to be_falsey
+      expect(fields).not_to be_valid
       expect(fields.errors).to eq({ name1: ["Invalid field: 'name1'"] })
     }
 
     it {
       fields = described_class.new(struct, { name: 0 })
-      expect(fields.valid?).to be_falsey
+      expect(fields).not_to be_valid
       expect(fields.errors).to eq({ name: ["Should have correct type: 'string'"] })
     }
 
     it {
       fields = described_class.new(struct, { phone: '123456789' })
-      expect(fields.valid?).to be_falsey
+      expect(fields).not_to be_valid
       expect(fields.errors).to eq({ phone: ["Should have correct type: 'integer'"] })
     }
 
     it {
       fields = described_class.new(struct, { gender: 'unknown' })
-      expect(fields.valid?).to be_falsey
+      expect(fields).not_to be_valid
       expect(fields.errors).to eq({
                                     gender: ["Should have correct type: '{:single_field=>[\"male\", \"female\", \"no_info\"]}'"]
                                   })
@@ -72,7 +74,7 @@ RSpec.describe DynamicFields do
 
     it {
       fields = described_class.new(struct, { languages: 'es' })
-      expect(fields.valid?).to be_falsey
+      expect(fields).not_to be_valid
       expect(fields.errors).to eq({
                                     languages: ["Should have correct type: '{:multiple_fields=>[\"uk\", \"ru\", \"en\"]}'"]
                                   })
@@ -80,7 +82,7 @@ RSpec.describe DynamicFields do
 
     it {
       fields = described_class.new(struct, { languages: ['es'] })
-      expect(fields.valid?).to be_falsey
+      expect(fields).not_to be_valid
       expect(fields.errors).to eq({
                                     languages: ["Should have correct type: '{:multiple_fields=>[\"uk\", \"ru\", \"en\"]}'"]
                                   })

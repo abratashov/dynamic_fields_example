@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/hash/keys'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/hash/indifferent_access'
@@ -36,12 +38,12 @@ class DynamicFields
 
   def valid_type?(field, value)
     case type(field)
-      in 'string' then value.is_a?(String)
-      in 'integer' then value.is_a?(Integer)
-      in { single_field: values } then
-        value.is_a?(String) && values.any?(value.to_s)
-      in { multiple_fields: values } then
-        value.is_a?(Array) && (value - values).empty?
+    in 'string' then value.is_a?(String)
+    in 'integer' then value.is_a?(Integer)
+    in { single_field: values } then
+      value.is_a?(String) && values.any?(value.to_s)
+    in { multiple_fields: values } then
+      value.is_a?(Array) && (value - values).empty?
     else
       false
     end

@@ -1,20 +1,26 @@
-class Api::V1::UsersController < Api::V1::ApiController
-  before_action :set_resource
+# frozen_string_literal: true
 
-  def update
-    service = Api::Users::Update.call(user: @user, params: params[:user].to_unsafe_h)
+module Api
+  module V1
+    class UsersController < Api::V1::ApiController
+      before_action :set_resource
 
-    service_error!(service) and return if service.failure?
+      def update
+        service = Api::Users::Update.call(user: @user, params: params[:user].to_unsafe_h)
 
-    render json: service.user
-  end
+        service_error!(service) and return if service.failure?
 
-  private
+        render json: service.user
+      end
 
-  def set_resource
-    # To simplify task we skip user authorization
-    # @user = current_user.users.find(params[:id])
+      private
 
-    @user = User.find(params[:id])
+      def set_resource
+        # To simplify task we skip user authorization
+        # @user = current_user.users.find(params[:id])
+
+        @user = User.find(params[:id])
+      end
+    end
   end
 end

@@ -29,7 +29,7 @@ RSpec.describe Api::Users::Update do
 
     context 'with data filling' do
       it 'fills user data' do
-        expect { service }.to change { DynamicRecord.count }.by(1)
+        expect { service }.to change(DynamicRecord, :count).by(1)
         expect(j2h(UserSerializer.new(service.user.reload).to_json)).to eq(
           {
             'id' => '74ea0ce1-7cfe-451a-b953-df4cc750f037',
@@ -122,7 +122,7 @@ RSpec.describe Api::Users::Update do
       let(:user) { nil }
 
       it 'returns an error' do
-        expect(service.failure?).to be_truthy
+        expect(service).to be_failure
         expect(service.error).to match('user is missing')
       end
     end

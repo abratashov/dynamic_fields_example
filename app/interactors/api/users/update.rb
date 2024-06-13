@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module Users
     class Update
@@ -16,7 +18,8 @@ module Api
         ActiveRecord::Base.transaction do
           user_info = user.user_info || user_info_init
 
-          context.fail!(error: user_info.errors.full_messages.join('. ')) unless user_info.update_data(user_info_data, merge: merge?)
+          context.fail!(error: user_info.errors.full_messages.join('. ')) unless user_info.update_data(user_info_data,
+                                                                                                       merge: merge?)
         end
         context.user.reload
       end
@@ -35,13 +38,12 @@ module Api
       end
 
       def params_hash
-        params.dig(:user_info)
+        params[:user_info]
       end
 
       def user_info_data
         params_hash&.dig(:data) || {}
       end
-
 
       def merge?
         ActiveModel::Type::Boolean.new.cast(params_hash&.dig(:merge))
@@ -49,4 +51,3 @@ module Api
     end
   end
 end
-
