@@ -1,5 +1,8 @@
 ruby 3.3.2
 # nodejs 20.12.1
 # yarn 1.22.22
-# postgres 15.7
+
+postgres 15.7
+#pg_ctl start
+
 # redis 7.0.15
