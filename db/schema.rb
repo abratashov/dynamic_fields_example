@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_073514) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_101654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_073514) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fields_structable_type", "fields_structable_id"], name: "index_dynamic_structs_on_fields_structable"
+    t.index ["name", "fields_structable_type", "fields_structable_id"], name: "idx_on_name_fields_structable_type_fields_structabl_590572e35b", unique: true
   end
 
   create_table "tenants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
